@@ -10,6 +10,10 @@ import {
   IconButton,
   ListItemIcon,
   ListItemText,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import WindowIcon from "@mui/icons-material/Window";
@@ -18,6 +22,7 @@ import DirectionsBikeOutlinedIcon from "@mui/icons-material/DirectionsBikeOutlin
 import LaptopMacOutlinedIcon from "@mui/icons-material/LaptopMacOutlined";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined";
+import { Close } from "@mui/icons-material";
 
 const Header3 = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -32,7 +37,23 @@ const Header3 = () => {
   };
 
   const theme = useTheme();
+  const [state, setState] = useState({
+    top: true,
+    left: false,
+    bottom: false,
+    right: false,
+  });
 
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
   return (
     <Container
       sx={{
@@ -111,9 +132,21 @@ const Header3 = () => {
           </MenuItem>
         </Menu>
       </Box>
-      <IconButton>
+      <IconButton onClick={toggleDrawer("top", true)}>
         <MenuIcon />
       </IconButton>
+      <Drawer
+        anchor={"top"}
+        open={state["top"]}
+        onClose={toggleDrawer("top", false)}
+      >
+        aaaa
+        <Box className="border" sx={{ width: 444, mx: "auto", mt: 6 }}>
+          <IconButton>
+            <Close />
+          </IconButton>
+        </Box>
+      </Drawer>
     </Container>
   );
 };
