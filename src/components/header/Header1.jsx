@@ -12,6 +12,7 @@ import {
   ListItemText,
   MenuItem,
   Menu,
+  useMediaQuery,
 } from "@mui/material";
 import {
   DarkModeOutlined,
@@ -27,20 +28,24 @@ const options = ["AR", "EN"];
 const Header1 = () => {
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
   const open = Boolean(anchorEl);
 
+  // Handle click on language selection button
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  // Handle selection of language option
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
     setAnchorEl(null);
   };
 
+  // Close the language selection menu
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -56,6 +61,7 @@ const Header1 = () => {
     >
       <Container>
         <Stack direction="row" alignItems="center" spacing={2}>
+          {/* "Hot" label */}
           <Typography
             sx={{
               p: "3px 10px",
@@ -70,6 +76,7 @@ const Header1 = () => {
             Hot
           </Typography>
 
+          {/* "Free Express Shipping" text */}
           <Typography
             sx={{
               fontSize: "12px",
@@ -81,8 +88,10 @@ const Header1 = () => {
             Free Express Shipping
           </Typography>
 
+          {/* Spacer */}
           <Box flexGrow={1} />
 
+          {/* Toggle light/dark mode button */}
           <IconButton
             onClick={() => {
               const newMode = theme.palette.mode === "dark" ? "light" : "dark";
@@ -100,7 +109,7 @@ const Header1 = () => {
             )}
           </IconButton>
 
-          {/*=============== Multi-language Selection ================*/}
+          {/* Language selection */}
           <List
             component="nav"
             aria-label="Language selection"
@@ -149,38 +158,42 @@ const Header1 = () => {
               </MenuItem>
             ))}
           </Menu>
-          {/*=============== End Multi-language Selection ================*/}
 
-          <IconButton
-            component="a"
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Twitter"
-            sx={{ color: "#fff", fontSize: "12px" }}
-          >
-            <TwitterIcon />
-          </IconButton>
-          <IconButton
-            component="a"
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-            sx={{ color: "#fff", fontSize: "12px"}}
-          >
-            <FacebookIcon />
-          </IconButton>
-          <IconButton
-            component="a"
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            sx={{ color: "#fff", fontSize: "12px" }}
-          >
-            <InstagramIcon />
-          </IconButton>
+          {/* Social media icons */}
+          {!isMobile && (
+            <>
+              <IconButton
+                component="a"
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                sx={{ color: "#fff", fontSize: "12px" }}
+              >
+                <TwitterIcon />
+              </IconButton>
+              <IconButton
+                component="a"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                sx={{ color: "#fff", fontSize: "12px" }}
+              >
+                <FacebookIcon />
+              </IconButton>
+              <IconButton
+                component="a"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                sx={{ color: "#fff", fontSize: "12px" }}
+              >
+                <InstagramIcon />
+              </IconButton>
+            </>
+          )}
         </Stack>
       </Container>
     </Box>
