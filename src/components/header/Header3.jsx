@@ -44,7 +44,6 @@ const Header3 = () => {
     >
       <Box>
         <Button
-          className="border"
           id="basic-button"
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
@@ -72,6 +71,18 @@ const Header3 = () => {
           onClose={handleClose}
           MenuListProps={{
             "aria-labelledby": "basic-button",
+          }}
+          sx={{
+            ".MuiButtonBase-root": {
+              bgcolor:
+                theme.palette.myColor?.main || theme.palette.primary.main,
+            },
+            ".MuiList-root": { py: 0 },
+          }}
+          PaperProps={{
+            style: {
+              width: anchorEl ? anchorEl.clientWidth : 222,
+            },
           }}
         >
           <MenuItem onClick={handleClose}>
