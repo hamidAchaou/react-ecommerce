@@ -8,9 +8,9 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header1 />
+        {/* <Header1 /> */}
         <Header2 />
-        <Header3 />
+        {/* <Header3 /> */}
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
